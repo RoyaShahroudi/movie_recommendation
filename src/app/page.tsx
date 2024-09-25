@@ -23,7 +23,7 @@ export default async function Home() {
                         <NewTrailers/>
                     </div>
                     <div className="lg:col-span-5 md:col-span-4 md:order-2 order-1">
-                        <HeroPost title={results[13].title} posterPath={results[13].poster_path}
+                        <HeroPost id={results[13].id} title={results[13].title} posterPath={results[13].poster_path}
                                   releaseDate={results[13].release_date} voteAverage={results[13].vote_average}/>
                         <MovieList/>
                     </div>

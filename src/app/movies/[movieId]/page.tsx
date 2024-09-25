@@ -2,6 +2,7 @@ import React from 'react';
 import Container from "@/app/_components/container";
 import NewTrailers from "@/app/_components/newTrailers";
 import StarIcon from "@mui/icons-material/Star";
+import Image from "next/image";
 
 const API_KEY = process.env.API_KEY
 
@@ -30,7 +31,7 @@ const MovieDetails = async ({params}: {
                 </div>
                 <div className="lg:col-span-5 md:col-span-4 md:order-2 order-1">
                     <section>
-                        <div className="rounded-xl relative h-[500px] mt-9">
+                        <div className="rounded-xl relative h-[513px] mt-9">
                             <div
                                 className="absolute bottom-0 left-0 w-full px-2 h-1/3 bg-gray-500/50 backdrop-blur-sm rounded-xl text-white">
                                 <div className="flex items-center justify-between h-full">
@@ -48,22 +49,32 @@ const MovieDetails = async ({params}: {
                             </div>
                             <div
                                 className="z-10 reletive bg-gradient-to-r from-indigo-500 h-full w-full rounded-xl bg-gray-500">
-                                <img
-                                    className="z-0 absolute h-full w-full object-cover rounded-xl"
-                                    src={`https://image.tmdb.org/t/p/original${movieDetails.poster_path}`}
-                                    alt="/"
+                                <Image src={`https://image.tmdb.org/t/p/original${movieDetails.poster_path}`}
+                                       alt={movieDetails.title}
+                                       layout="fill"
+                                       objectFit="cover"
+                                       className="rounded-xl"
                                 />
                             </div>
 
                         </div>
-                        <div className="py-8 px-10">
-                            {movieDetails.overview}
+                        <div className="pb-8 mt-[-14px] px-10">
+                            <div className="flex items-center mb-4">
+                                {movieDetails.genres.map((genre: { id: number, name: string }) => {
+                                    return (
+                                        <div
+                                            key={genre.id}
+                                            className="text-white font-light text-sm py-1 px-2 mr-2 rounded-full bg-gray-500/50 backdrop-blur-sm">
+                                            {genre.name}
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                            <p>{movieDetails.overview}</p>
                         </div>
                     </section>
                 </div>
-
             </div>
-
         </Container>
     );
 };
